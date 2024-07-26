@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- SHIFT + ! -->
 <html lang="en">
 
     <head>
@@ -15,7 +15,7 @@
             <div class="logo">Ivan Calarde</div> <!-- website logo -->
             <div> <!-- create another div -->
                 <ul class="nav-links"> <!-- nav links -->
-                    <li><a href="#about">About</a></li> <!-- nav sections -->
+                    <li><a href="#about">About</a></li> <!-- nav sections --> <!-- SHIFT + ALT + ARROW DOWN -->
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -23,9 +23,25 @@
             </div>
         </nav>
 
-        <nav id="hamburger-nav"> <!-- create another nav -->
+        <nav id="hamburger-nav"> <!-- create hamburger icon nav for mobile nav -->
 
             <div class="logo">Ivan Calarde</div>
+            <div class="hamburger-menu">
+
+                <div class="hamburger-icon" onclick="toggleMenu()"> <!-- targeted on script.js -->
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                </div>
+
+                <div class="menu-links"> <!-- targeted on script.js -->
+                    <li><a href="#about" onclick="toggleMenu()">About</a></li> <!-- put toggleMenu() to close the tab when clicked again -->
+                    <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+                    <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+                </div>
+
+            </div>
 
         </nav>
 

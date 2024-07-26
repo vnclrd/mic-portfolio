@@ -1,5 +1,7 @@
 /* DEFINITIONS
 
+a                       - links
+li                      - list item
 margin                  - creates space around elements outside of any defined borders
 padding                 - creates space around elements inside of any defined borders
 font-family             - set font-style
@@ -22,6 +24,10 @@ DENOMINATIONS:
 vh                  - viewport height (10vh = 10% of screen)
 rem                 - room-em, dictates an element's font size relative to the size of the root element (1rem = 16 px)
 
+SELECTORS:
+.element            - targets elements by class
+#element            - target elements by Id
+
 */
 
 /* GENERAL */
@@ -33,49 +39,49 @@ rem                 - room-em, dictates an element's font size relative to the s
     padding: 0;
 }
 
-body { /* targets the body on html */
+body {
     font-family: "Poppins", sans-serif;
 }
 
-html { /* targets the html as a whole */
+html {
     scroll-behavior: smooth;
 }
 
-p { /* targets paragraph (p) elements */
+p {
     color: rgb(85, 85, 85);
 }
 
 /* TRANSITION */
 
-a, .btn { /* targets the links (a), buttons (.btn) */
+a, .btn {
     transition: all 300ms ease;
 }
 
 /* NAVIGATION */
 
-nav, .nav-links { /* targets the navigation (nav), navigation links (nav-links) */
+nav, .nav-links {
     display: flex;
 }
 
-nav { /* targets navigation (nav) only */
+nav {
     justify-content: space-around;
     align-items: center;
     height: 17vh;
 }
 
-.nav-links { /* targets navigation links (nav-links) only */
+.nav-links {
     gap: 2rem; 
     list-style: none;
     font-size: 1.5rem;
 }
 
-a { /* targets links (a) */
+a {
     color: black;
     text-decoration: none;
     text-decoration-color: white;
 }
 
-a:hover { /* creates a hover effect on links (a) */
+a:hover {
     color: gray;
     text-decoration: underline;
     text-underline-offset: 1rem;
@@ -88,4 +94,86 @@ a:hover { /* creates a hover effect on links (a) */
 
 .logo:hover { /* create a hover effect on logo */
     cursor: default;
+}
+
+/* MOBILE VIEW */
+
+#hamburger-nav { /* targets the hamburger nav */
+    display: none; /* for the hamburger menu to not display on desktop */
+}
+
+.hamburger-menu { /* targets the hamburger menu */
+    position: relative;
+    display: inline-block;
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.hamburger-icon span {
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    transition: all 0.3 ease-in-out;
+}
+
+.menu-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    width: fit-content;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3 ease-in-out;
+}
+
+.menu-links a {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    color: black;
+    text-decoration: none;
+    transition: all 0.3 ease-in-out;
+}
+
+.menu-links li {
+    list-style: none;
+}
+
+.menu-links.open {
+    max-height: 300px;
+}
+
+/* rotate the hamburger icon when clicked */
+
+.hamburger-icon.open span:first-child { /* targets first line */
+    transform: rotate(45deg) translate(10px, 5px);
+}
+
+.hamburger-icon.open span:nth-child(2) { /* targets second line */
+    opacity: 0;
+}
+
+.hamburger-icon.open span:last-child { /* targets third line */
+    transform: rotate(-45deg) translate(10px, -5px);
+}
+
+.hamburger-icon span:first-child {
+    transform: none;
+}
+
+.hamburger-icon span:first-child {
+    opacity: 1;
+}
+
+.hamburger-icon span:first-child {
+    transform: none;
 }
