@@ -30,15 +30,21 @@ const App = () => {
     const container = certificationsContainerRef.current;
     if (!container) return;
 
-    const scrollSpeed = 1; // Pixels per interval
-    const intervalTime = 20; // Milliseconds
+    const scrollSpeed = 1;
+    const intervalTime = 20;
 
     if (scrollIntervalRef.current) {
       clearInterval(scrollIntervalRef.current);
     }
 
+    const card = container.querySelector('[data-card]');
+    const cardWidth = card?.offsetWidth || 300;
+    const gap = 24; // Tailwind's space-x-6 = 1.5rem
+    const totalCards = certifications.length;
+
+    const maxScrollLeft = (cardWidth + gap) * (totalCards - 0);
+
     scrollIntervalRef.current = setInterval(() => {
-      const maxScrollLeft = Infinity;
       if (container.scrollLeft >= maxScrollLeft) {
         clearInterval(scrollIntervalRef.current);
         scrollIntervalRef.current = null;
@@ -47,6 +53,7 @@ const App = () => {
       }
     }, intervalTime);
   };
+
 
   const stopAutomaticScrolling = () => {
     if (scrollIntervalRef.current) {
@@ -292,6 +299,46 @@ const App = () => {
     });
   };
 
+  let resumeScrollTimeout = null;
+
+  const pauseAutoScrollTemporarily = () => {
+    stopAutomaticScrolling();
+    if (resumeScrollTimeout) {
+      clearTimeout(resumeScrollTimeout);
+    }
+    resumeScrollTimeout = setTimeout(() => {
+      startAutomaticScrolling();
+    }, 5000);
+  };
+
+  const scrollCertificationsLeft = () => {
+    const container = certificationsContainerRef.current;
+    if (!container) return;
+
+    pauseAutoScrollTemporarily();
+
+    const card = container.querySelector('[data-card]');
+    const cardWidth = card?.offsetWidth || 300;
+    const gap = 24;
+    const scrollAmount = cardWidth + gap;
+
+    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  };
+
+  const scrollCertificationsRight = () => {
+    const container = certificationsContainerRef.current;
+    if (!container) return;
+
+    pauseAutoScrollTemporarily();
+
+    const card = container.querySelector('[data-card]');
+    const cardWidth = card?.offsetWidth || 300;
+    const gap = 24;
+    const scrollAmount = cardWidth + gap;
+
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
+
   return (
     <div className="font-sans antialiased text-gray-800 bg-gray-50">
 
@@ -454,44 +501,66 @@ const App = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
           Certifications
         </h2>
-        {/* Added ref and hide-scrollbar class */}
-        <div
-          ref={certificationsContainerRef}
-          className="flex space-x-6 overflow-x-auto pb-4 scroll-smooth hide-scrollbar py-1"
-          style={{ cursor: isDragging ? 'grabbing' : 'grab' }} // Change cursor based on dragging state
-        >
-          {/* Use displayCertifications for duplication */}
-          {displayCertifications.map((cert, index) => (
-            <div key={`${cert.id}-${index}`} className="bg-white rounded-xl shadow-lg overflow-hidden border-b-4 border-green-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex flex-col text-center min-w-[300px]">
-              <img
-                src={cert.imageUrl}
-                alt={cert.name}
-                className="w-full h-32 object-cover rounded-t-xl"
-                onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/150x100/CCCCCC/000000?text=Cert+Image`; }}
-              />
-              <div className="p-6 flex-grow flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-semibold text-green-700 mb-1">{cert.name}</h3>
-                  <p className="text-gray-700 text-lg mb-1">{cert.issuer}</p>
-                  <p className="text-gray-500 text-sm mb-3">{cert.date}</p>
-                  <p className="text-gray-700 leading-relaxed mb-3">{cert.description}</p>
+        <div className="relative flex items-center justify-center"> {/* Added wrapper for buttons */}
+          <button
+            onClick={scrollCertificationsLeft}
+            className="absolute left-0 z-10 p-3 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 -ml-4" // Adjusted position
+            aria-label="Scroll left"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+
+          {/* Added ref and hide-scrollbar class */}
+          <div
+            ref={certificationsContainerRef}
+            className="flex space-x-6 overflow-x-auto pb-4 scroll-smooth hide-scrollbar py-1"
+            style={{ cursor: isDragging ? 'grabbing' : 'grab' }} // Change cursor based on dragging state
+          >
+            {/* Use displayCertifications for duplication */}
+            {displayCertifications.map((cert, index) => (
+              <div key={`${cert.id}-${index}`} className="bg-white rounded-xl shadow-lg overflow-hidden border-b-4 border-green-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex flex-col text-center min-w-[300px]"> {/* min-w-[300px] controls card width */}
+                <img
+                  src={cert.imageUrl}
+                  alt={cert.name}
+                  className="w-full h-32 object-cover rounded-t-xl"
+                  onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/150x100/CCCCCC/000000?text=Cert+Image`; }}
+                />
+                <div className="p-6 flex-grow flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl font-semibold text-green-700 mb-1">{cert.name}</h3>
+                    <p className="text-gray-700 text-lg mb-1">{cert.issuer}</p>
+                    <p className="text-gray-500 text-sm mb-3">{cert.date}</p>
+                    <p className="text-gray-700 leading-relaxed mb-3">{cert.description}</p>
+                  </div>
+                  {cert.credentialUrl && (
+                    <a
+                      href={cert.credentialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center text-blue-600 hover:text-blue-800 font-semibold transition duration-300 mt-auto"
+                    >
+                      View Credential
+                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                      </svg>
+                    </a>
+                  )}
                 </div>
-                {cert.credentialUrl && (
-                  <a
-                    href={cert.credentialUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center text-blue-600 hover:text-blue-800 font-semibold transition duration-300 mt-auto"
-                  >
-                    View Credential
-                    <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
-                  </a>
-                )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <button
+            onClick={scrollCertificationsRight}
+            className="absolute right-0 z-10 p-3 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 -mr-4" // Adjusted position
+            aria-label="Scroll right"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
         </div>
       </section>
 
