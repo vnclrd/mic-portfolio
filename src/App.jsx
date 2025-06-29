@@ -439,8 +439,8 @@ const App = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="container mx-auto px-4 py-16 md:py-12 scroll-mt-[96px]">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
+      <section id="projects" className="container mx-auto px-4 py-12 md:py-12 scroll-mt-[96px]">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDarkMode ? 'text-white' : 'text-indigo-700'}`}>
           Projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
@@ -483,9 +483,9 @@ const App = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className={`py-16 md:py-12 scroll-mt-[96px] ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+      <section id="skills" className={`py-12 md:py-12 scroll-mt-[96px] ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDarkMode ? 'text-white' : 'text-indigo-700'}`}>
             Skills
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -496,7 +496,7 @@ const App = () => {
                   {skillList.map((skill, index) => (
                     <li key={index} className={`flex items-center ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                       <svg className={`w-4 h-4 mr-2 flex-shrink-0 ${isDarkMode ? 'text-indigo-300' : 'text-indigo-400'}`} fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 to 001.414 0l4-4z" clipRule="evenodd"></path>
                       </svg>
                       {skill}
                     </li>
@@ -509,9 +509,9 @@ const App = () => {
       </section>
 
       {/* Education Section */}
-      <section id="education" className={`pt-8 md:pt-6 py-16 md:py-24 scroll-mt-[96px] ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <section id="education" className={`pt-12 md:pt-12 py-12 md:py-12 scroll-mt-[96px] ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDarkMode ? 'text-white' : 'text-indigo-700'}`}>
             Education
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -530,14 +530,14 @@ const App = () => {
       </section>
 
       {/* Certifications Section */}
-      <section id="certifications" className="container mx-auto px-4 py-16 md:py-6 scroll-mt-[96px]">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
+      <section id="certifications" className={`mx-auto px-4 py-12 md:py-12 scroll-mt-[96px] ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDarkMode ? 'text-white' : 'text-indigo-700'}`}>
           Certifications
         </h2>
         <div className="relative flex items-center justify-center shadow-mask">
           <button
             onClick={scrollCertificationsLeft}
-            className={`absolute left-0 z-10 p-3 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-opacity-75 -ml-4 ${isDarkMode ? 'bg-indigo-700 hover:bg-indigo-600 focus:ring-indigo-400' : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'}`}
+            className={`absolute left-4 z-10 p-3 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-opacity-75 ${isDarkMode ? 'bg-indigo-700 hover:bg-indigo-600 focus:ring-indigo-400' : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'}`}
             aria-label="Scroll left"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -587,7 +587,7 @@ const App = () => {
 
           <button
             onClick={scrollCertificationsRight}
-            className={`absolute right-0 z-10 p-3 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-opacity-75 -mr-4 ${isDarkMode ? 'bg-indigo-700 hover:bg-indigo-600 focus:ring-indigo-400' : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'}`}
+            className={`absolute right-4 z-10 p-3 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-opacity-75 ${isDarkMode ? 'bg-indigo-700 hover:bg-indigo-600 focus:ring-indigo-400' : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'}`}
             aria-label="Scroll right"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -598,9 +598,9 @@ const App = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className={`container mx-auto px-4 py-16 md:py-2 pb-8 md:pb-12 scroll-mt-[96px] ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+      <section id="about" className={`container mx-auto px-4 py-12 md:py-12 scroll-mt-[96px] ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
         <div className={`max-w-3xl mx-auto p-8 md:p-10 rounded-xl shadow-lg ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8">
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${isDarkMode ? 'text-white' : 'text-indigo-700'}`}>
             About Me
           </h2>
           <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed mb-4`}>
@@ -616,7 +616,7 @@ const App = () => {
       </section>
 
       {/* GitHub Section */}
-      <section id="github" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 md:py-12 scroll-mt-[96px]">
+      <section id="github" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 md:py-12 scroll-mt-[96px]">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Check out my GitHub!
