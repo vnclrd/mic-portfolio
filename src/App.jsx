@@ -5,6 +5,12 @@ const App = () => {
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const certificationsContainerRef = useRef(null);
 
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeftStart, setScrollLeftStart] = useState(0);
+
+  const scrollIntervalRef = useRef(null);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
@@ -20,40 +26,86 @@ const App = () => {
     };
   }, []);
 
+  const startAutomaticScrolling = () => {
+    const container = certificationsContainerRef.current;
+    if (!container) return;
+
+    const scrollSpeed = 1; // Pixels per interval
+    const intervalTime = 60; // Milliseconds (controls smoothness and speed)
+
+    if (scrollIntervalRef.current) {
+      clearInterval(scrollIntervalRef.current);
+    }
+
+    scrollIntervalRef.current = setInterval(() => {
+      if (container.scrollLeft >= container.scrollWidth / 2) {
+        container.scrollLeft -= container.scrollWidth / 2;
+      } else {
+        container.scrollLeft += scrollSpeed;
+      }
+    }, intervalTime);
+  };
+
+  const stopAutomaticScrolling = () => {
+    if (scrollIntervalRef.current) {
+      clearInterval(scrollIntervalRef.current);
+      scrollIntervalRef.current = null;
+    }
+  };
+
   useEffect(() => {
     const container = certificationsContainerRef.current;
     if (!container) return;
 
-    let scrollInterval;
-    const scrollSpeed = 1;
-    const intervalTime = 20;
+    startAutomaticScrolling();
 
-    const startScrolling = () => {
-      scrollInterval = setInterval(() => {
-        if (container.scrollLeft >= container.scrollWidth / 2) {
-          container.scrollLeft -= container.scrollWidth / 2;
-        } else {
-          container.scrollLeft += scrollSpeed;
-        }
-      }, intervalTime);
+    const handleMouseDown = (e) => {
+      stopAutomaticScrolling(); // Pause automatic scrolling
+      setIsDragging(true);
+      setStartX(e.pageX - container.offsetLeft);
+      setScrollLeftStart(container.scrollLeft);
+      container.style.cursor = 'grabbing';
     };
 
-    const stopScrolling = () => {
-      clearInterval(scrollInterval);
+    const handleMouseLeave = () => {
+      if (isDragging) { // Only restart if it was actively dragging
+        setIsDragging(false);
+        startAutomaticScrolling(); // Resume automatic scrolling
+        container.style.cursor = 'grab';
+      }
     };
 
-    startScrolling();
+    const handleMouseUp = () => {
+      if (isDragging) { // Only restart if it was actively dragging
+        setIsDragging(false);
+        startAutomaticScrolling(); // Resume automatic scrolling
+        container.style.cursor = 'grab';
+      }
+    };
 
-    container.addEventListener('mouseenter', stopScrolling);
-    container.addEventListener('mouseleave', startScrolling);
+    const handleMouseMove = (e) => {
+      if (!isDragging) return;
+      e.preventDefault(); // Prevent text selection
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX); // How far the mouse has moved
+      container.scrollLeft = scrollLeftStart - walk;
+    };
+
+    container.addEventListener('mousedown', handleMouseDown);
+    container.addEventListener('mouseleave', handleMouseLeave);
+    container.addEventListener('mouseup', handleMouseUp);
+    container.addEventListener('mousemove', handleMouseMove);
 
     return () => {
-      stopScrolling();
-      container.removeEventListener('mouseenter', stopScrolling);
-      container.removeEventListener('mouseleave', startScrolling);
+      stopAutomaticScrolling();
+      container.removeEventListener('mousedown', handleMouseDown);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+      container.removeEventListener('mouseup', handleMouseUp);
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mouseenter', stopAutomaticScrolling);
+      container.removeEventListener('mouseleave', startAutomaticScrolling);
     };
-  }, []);
-
+  }, [isDragging, startX, scrollLeftStart]);
 
   const skills = {
     'Web Development': ['HTML5', 'CSS3', 'JavaScript (ES6+)'],
@@ -220,6 +272,7 @@ const App = () => {
     },
   ];
 
+  // Duplicate certifications for seamless scrolling effect
   const displayCertifications = [...certifications, ...certifications];
 
   const scrollToSection = (id) => {
@@ -403,6 +456,7 @@ const App = () => {
         <div
           ref={certificationsContainerRef}
           className="flex space-x-6 overflow-x-auto pb-4 scroll-smooth hide-scrollbar"
+          style={{ cursor: isDragging ? 'grabbing' : 'grab' }} // Change cursor based on dragging state
         >
           {/* Use displayCertifications for duplication */}
           {displayCertifications.map((cert, index) => (
