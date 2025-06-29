@@ -26,34 +26,60 @@ const App = () => {
     };
   }, []);
 
+  const scrollDirectionRef = useRef('forward');
+  const scrollPausedRef = useRef(false);
+
   const startAutomaticScrolling = () => {
     const container = certificationsContainerRef.current;
-    if (!container) return;
+    if (!container || scrollPausedRef.current) return;
 
     const scrollSpeed = 1;
     const intervalTime = 20;
+    const card = container.querySelector('[data-card]');
+    const cardWidth = card?.offsetWidth || 300;
+    const gap = 24;
+    const totalCards = certifications.length;
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
 
     if (scrollIntervalRef.current) {
       clearInterval(scrollIntervalRef.current);
     }
 
-    const card = container.querySelector('[data-card]');
-    const cardWidth = card?.offsetWidth || 300;
-    const gap = 24; // Tailwind's space-x-6 = 1.5rem
-    const totalCards = certifications.length;
-
-    const maxScrollLeft = (cardWidth + gap) * (totalCards - 0);
-
     scrollIntervalRef.current = setInterval(() => {
-      if (container.scrollLeft >= maxScrollLeft) {
-        clearInterval(scrollIntervalRef.current);
-        scrollIntervalRef.current = null;
-      } else {
+      if (!container) return;
+
+      if (scrollDirectionRef.current === 'forward') {
         container.scrollLeft += scrollSpeed;
+
+        if (container.scrollLeft >= maxScrollLeft) {
+          clearInterval(scrollIntervalRef.current);
+          scrollIntervalRef.current = null;
+          scrollPausedRef.current = true;
+
+          setTimeout(() => {
+            scrollDirectionRef.current = 'backward';
+            scrollPausedRef.current = false;
+            startAutomaticScrolling();
+          }, 5000);
+        }
+
+      } else {
+        container.scrollLeft -= scrollSpeed;
+
+        if (container.scrollLeft <= 0) {
+          clearInterval(scrollIntervalRef.current);
+          scrollIntervalRef.current = null;
+          scrollPausedRef.current = true;
+
+          setTimeout(() => {
+            scrollDirectionRef.current = 'forward';
+            scrollPausedRef.current = false;
+            startAutomaticScrolling();
+          }, 5000);
+        }
       }
     }, intervalTime);
   };
-
 
   const stopAutomaticScrolling = () => {
     if (scrollIntervalRef.current) {
@@ -69,7 +95,7 @@ const App = () => {
     startAutomaticScrolling();
 
     const handleMouseDown = (e) => {
-      stopAutomaticScrolling(); // Pause automatic scrolling
+      stopAutomaticScrolling();
       setIsDragging(true);
       setStartX(e.pageX - container.offsetLeft);
       setScrollLeftStart(container.scrollLeft);
@@ -77,17 +103,17 @@ const App = () => {
     };
 
     const handleMouseLeave = () => {
-      if (isDragging) { // Only restart if it was actively dragging
+      if (isDragging) {
         setIsDragging(false);
-        startAutomaticScrolling(); // Resume automatic scrolling
+        startAutomaticScrolling();
         container.style.cursor = 'grab';
       }
     };
 
     const handleMouseUp = () => {
-      if (isDragging) { // Only restart if it was actively dragging
+      if (isDragging) {
         setIsDragging(false);
-        startAutomaticScrolling(); // Resume automatic scrolling
+        startAutomaticScrolling();
         container.style.cursor = 'grab';
       }
     };
@@ -281,8 +307,7 @@ const App = () => {
     },
   ];
 
-  // Duplicate certifications for seamless scrolling effect
-  const displayCertifications = [...certifications, ...certifications];
+  const displayCertifications = certifications;
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
