@@ -2,6 +2,23 @@ import React, { useState, useEffect } from 'react';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showScrollToTop, setShowScrollToTop] = useState(false); // State for scroll-to-top button visibility
+
+  // Effect to handle scroll event for the scroll-to-top button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) { // Show button after scrolling down 300px
+        setShowScrollToTop(true);
+      } else {
+        setShowScrollToTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const skills = {
     'Web Development': ['HTML5', 'CSS3', 'JavaScript (ES6+)'],
@@ -83,6 +100,14 @@ const App = () => {
     }
   };
 
+  // Function to scroll to the top of the page
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className="font-sans antialiased text-gray-800 bg-gray-50">
 
@@ -130,8 +155,8 @@ const App = () => {
       </header>
 
       {/* Intro Section */}
-      <section className="relative bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-24 md:py-25 pt-28">
-        <div className="container mx-auto px-4 text-center pt-10">
+      <section className="relative bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16 md:py-25 pt-32">
+        <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up">
             Hello, I'm Miguel Ivan Calarde
           </h1>
@@ -148,7 +173,6 @@ const App = () => {
       </section>
 
       {/* About Section */}
-      {/* MODIFIED: Added scroll-mt-[96px] */}
       <section id="about" className="container mx-auto px-4 py-16 md:py-12 pb-8 md:pb-12 scroll-mt-[96px]">
         <div className="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-lg">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8">
@@ -167,8 +191,7 @@ const App = () => {
       </section>
 
       {/* Education Section */}
-      {/* MODIFIED: Added scroll-mt-[96px] */}
-      <section id="education" className="bg-gray-50 pt-8 md:pt-6 py-16 md:py-24 scroll-mt-[96px]">
+      <section id="education" className="bg-gray-50 pt-8 md:pt-6 py-16 md:py-20 scroll-mt-[96px]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
             Education
@@ -190,8 +213,7 @@ const App = () => {
       </section>
 
       {/* Skills Section */}
-      {/* MODIFIED: Added scroll-mt-[96px] */}
-      <section id="skills" className="bg-gray-100 py-16 md:py-12 scroll-mt-[96px]">
+      <section id="skills" className="bg-gray-100 py-16 md:py-16 scroll-mt-[96px]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
             Skills
@@ -217,8 +239,7 @@ const App = () => {
       </section>
 
       {/* Projects Section */}
-      {/* MODIFIED: Added scroll-mt-[96px] */}
-      <section id="projects" className="container mx-auto px-4 py-16 md:py-12 scroll-mt-[96px]">
+      <section id="projects" className="container mx-auto px-4 py-16 md:py-16 scroll-mt-[96px]">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
           Projects
         </h2>
@@ -262,8 +283,7 @@ const App = () => {
       </section>
 
       {/* GitHub Section */}
-      {/* MODIFIED: Added scroll-mt-[96px] */}
-      <section id="github" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 md:py-12 scroll-mt-[96px]">
+      <section id="github" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 md:py-16 scroll-mt-[96px]">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Check out my GitHub!
@@ -282,6 +302,22 @@ const App = () => {
           </div>
         </div>
       </section>
+
+      {/* Floating Scroll to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`
+          fixed bottom-4 right-4 bg-indigo-600 text-white p-3 rounded-full shadow-lg
+          hover:bg-indigo-700 transition-opacity duration-500 z-50
+          focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75
+          ${showScrollToTop ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+        `}
+        aria-label="Scroll to top"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+      </button>
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8">
