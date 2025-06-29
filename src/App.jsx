@@ -52,6 +52,27 @@ const App = () => {
     ],
   };
 
+  const projects = [
+    {
+      id: 'project-1',
+      category: 'Project 1',
+      title: 'Project 1',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      technologies: ['Python', 'HTML', 'CSS', 'JavaScript'],
+      imageUrl: 'https://placehold.co/600x400/FFF0F5/800000?text=Project+1',
+      link: '#',
+    },
+    {
+      id: 'project-2',
+      category: 'Project 2',
+      title: 'Project 2',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      technologies: ['Python', 'HTML', 'CSS', 'JavaScript'],
+      imageUrl: 'https://placehold.co/600x400/FFF0F5/800000?text=Project+2',
+      link: '#',
+    },
+  ];
+
   const education = [
     {
       id: 'edu-1',
@@ -71,24 +92,26 @@ const App = () => {
     },
   ];
 
-  const projects = [
+  const certifications = [
     {
-      id: 'project-1',
-      category: 'Project 1',
-      title: 'Project 1',
+      id: 'cert-1',
+      name: 'Certification 1',
+      issuer: 'Google (via Coursera)',
+      date: 'May 2023',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      technologies: ['Python', 'HTML', 'CSS', 'JavaScript'],
-      imageUrl: 'https://placehold.co/600x400/FFF0F5/800000?text=Project+1',
-      link: '#',
+      logoUrl: 'https://placehold.co/100x100/4285F4/FFFFFF?text=Google',
+      credentialUrl: '#',
+      imageUrl: 'https://placehold.co/150x100/4285F4/FFFFFF?text=Certification+1'
     },
     {
-      id: 'project-2',
-      category: 'Project 2',
-      title: 'Project 2',
+      id: 'cert-2',
+      name: 'Certification 2',
+      issuer: 'Google (via Coursera)',
+      date: 'May 2023',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      technologies: ['Python', 'HTML', 'CSS', 'JavaScript'],
-      imageUrl: 'https://placehold.co/600x400/FFF0F5/800000?text=Project+2',
-      link: '#',
+      logoUrl: 'https://placehold.co/100x100/FFD700/000000?text=UMich',
+      credentialUrl: '#',
+      imageUrl: 'https://placehold.co/150x100/4285F4/FFFFFF?text=Certification+2'
     },
   ];
 
@@ -121,10 +144,11 @@ const App = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6">
-            <button onClick={() => scrollToSection('about')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">About</button>
-            <button onClick={() => scrollToSection('education')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Education</button>
-            <button onClick={() => scrollToSection('skills')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Skills</button>
             <button onClick={() => scrollToSection('projects')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Projects</button>
+            <button onClick={() => scrollToSection('skills')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Skills</button>
+            <button onClick={() => scrollToSection('education')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Education</button>
+            <button onClick={() => scrollToSection('certifications')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Certifications</button>
+            <button onClick={() => scrollToSection('about')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">About</button>
             <button onClick={() => scrollToSection('github')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">GitHub</button>
           </div>
 
@@ -145,18 +169,19 @@ const App = () => {
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
           <div className="md:hidden bg-white shadow-lg py-2">
-            <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">About</button>
-            <button onClick={() => scrollToSection('education')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">Education</button>
-            <button onClick={() => scrollToSection('skills')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">Skills</button>
             <button onClick={() => scrollToSection('projects')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">Projects</button>
+            <button onClick={() => scrollToSection('skills')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">Skills</button>
+            <button onClick={() => scrollToSection('education')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">Education</button>
+            <button onClick={() => scrollToSection('certifications')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">Certifications</button>
+            <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">About</button>
             <button onClick={() => scrollToSection('github')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">GitHub</button>
           </div>
         )}
       </header>
 
       {/* Intro Section */}
-      <section className="relative bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16 md:py-25 pt-32">
-        <div className="container mx-auto px-4 text-center">
+      <section className="relative bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-24 md:py-25 pt-28">
+        <div className="container mx-auto px-4 text-center pt-10">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up">
             Hello, I'm Miguel Ivan Calarde
           </h1>
@@ -172,74 +197,8 @@ const App = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="container mx-auto px-4 py-16 md:py-12 pb-8 md:pb-12 scroll-mt-[96px]">
-        <div className="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-lg">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8">
-            About Me
-          </h2>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-          <p className="text-gray-700 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-        </div>
-      </section>
-
-      {/* Education Section */}
-      <section id="education" className="bg-gray-50 pt-8 md:pt-6 py-16 md:py-20 scroll-mt-[96px]">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
-            Education
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {education.map((edu) => (
-              <div key={edu.id} className="bg-white p-6 rounded-xl shadow-lg border-b-4 border-indigo-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex items-start space-x-4">
-                {/* Removed the <img> tag for the logo */}
-                <div>
-                  <h3 className="text-xl font-semibold text-indigo-600 mb-1">{edu.degree}</h3>
-                  <p className="text-gray-700 text-lg mb-1">{edu.institution}</p>
-                  <p className="text-gray-500 text-sm mb-3">{edu.years}</p>
-                  <p className="text-gray-700 leading-relaxed">{edu.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="bg-gray-100 py-16 md:py-16 scroll-mt-[96px]">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
-            Skills
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Object.entries(skills).map(([category, skillList]) => (
-              <div key={category} className="bg-white p-6 rounded-xl shadow-lg border-b-4 border-indigo-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                <h3 className="text-xl font-semibold text-indigo-600 mb-4">{category}</h3>
-                <ul className="list-disc list-inside text-gray-700 space-y-2">
-                  {skillList.map((skill, index) => (
-                    <li key={index} className="flex items-center">
-                      <svg className="w-4 h-4 text-indigo-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                      </svg>
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Projects Section */}
-      <section id="projects" className="container mx-auto px-4 py-16 md:py-16 scroll-mt-[96px]">
+      <section id="projects" className="container mx-auto px-4 py-16 md:py-12 scroll-mt-[96px]">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
           Projects
         </h2>
@@ -282,8 +241,111 @@ const App = () => {
         </div>
       </section>
 
+      {/* Skills Section */}
+      <section id="skills" className="bg-gray-100 py-16 md:py-12 scroll-mt-[96px]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
+            Skills
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {Object.entries(skills).map(([category, skillList]) => (
+              <div key={category} className="bg-white p-6 rounded-xl shadow-lg border-b-4 border-indigo-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                <h3 className="text-xl font-semibold text-indigo-600 mb-4">{category}</h3>
+                <ul className="list-disc list-inside text-gray-700 space-y-2">
+                  {skillList.map((skill, index) => (
+                    <li key={index} className="flex items-center">
+                      <svg className="w-4 h-4 text-indigo-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="bg-gray-50 pt-8 md:pt-6 py-16 md:py-24 scroll-mt-[96px]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
+            Education
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {education.map((edu) => (
+              <div key={edu.id} className="bg-white p-6 rounded-xl shadow-lg border-b-4 border-indigo-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex items-start space-x-4">
+                <div>
+                  <h3 className="text-xl font-semibold text-indigo-600 mb-1">{edu.degree}</h3>
+                  <p className="text-gray-700 text-lg mb-1">{edu.institution}</p>
+                  <p className="text-gray-500 text-sm mb-3">{edu.years}</p>
+                  <p className="text-gray-700 leading-relaxed">{edu.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section id="certifications" className="container mx-auto px-4 py-16 md:py-12 scroll-mt-[96px]">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
+          Certifications
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {certifications.map((cert) => (
+            <div key={cert.id} className="bg-white rounded-xl shadow-lg overflow-hidden border-b-4 border-green-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex flex-col text-center"> {/* Removed items-center from parent div */}
+              <img
+                src={cert.imageUrl}
+                alt={cert.name}
+                className="w-full h-32 object-cover rounded-t-xl"
+                onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/150x100/CCCCCC/000000?text=Cert+Image`; }}
+              />
+              <div className="p-6"> {/* Added padding to this div */}
+                <h3 className="text-xl font-semibold text-green-700 mb-1">{cert.name}</h3>
+                <p className="text-gray-700 text-lg mb-1">{cert.issuer}</p>
+                <p className="text-gray-500 text-sm mb-3">{cert.date}</p>
+                <p className="text-gray-700 leading-relaxed mb-3">{cert.description}</p>
+                {cert.credentialUrl && (
+                  <a
+                    href={cert.credentialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition duration-300"
+                  >
+                    View Credential
+                    <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="container mx-auto px-4 py-16 md:py-12 pb-8 md:pb-12 scroll-mt-[96px]">
+        <div className="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-lg">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8">
+            About Me
+          </h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p className="text-gray-700 leading-relaxed">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </section>
+
       {/* GitHub Section */}
-      <section id="github" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 md:py-16 scroll-mt-[96px]">
+      <section id="github" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 md:py-12 scroll-mt-[96px]">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Check out my GitHub!
