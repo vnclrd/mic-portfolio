@@ -368,7 +368,7 @@ const App = () => {
     <div className="font-sans antialiased text-gray-800 bg-gray-50">
 
       {/* Header/Navigation Bar */}
-      <header className="bg-white shadow-md fixed w-full z-10">
+      <header className="bg-white shadow-md fixed w-full z-50">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logo/Name */}
           <a href="#" className="text-2xl font-bold text-indigo-700 rounded-md p-2 hover:bg-indigo-50 transition duration-300">
@@ -522,11 +522,11 @@ const App = () => {
       </section>
 
       {/* Certifications Section */}
-      <section id="certifications" className="container mx-auto px-4 py-16 md:py-12 scroll-mt-[96px]">
+      <section id="certifications" className="container mx-auto px-4 py-16 md:py-6 scroll-mt-[96px]">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
           Certifications
         </h2>
-        <div className="relative flex items-center justify-center"> {/* Added wrapper for buttons */}
+        <div className="relative flex items-center justify-center shadow-mask">
           <button
             onClick={scrollCertificationsLeft}
             className="absolute left-0 z-10 p-3 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 -ml-4" // Adjusted position
@@ -540,7 +540,7 @@ const App = () => {
           {/* Added ref and hide-scrollbar class */}
           <div
             ref={certificationsContainerRef}
-            className="flex space-x-6 overflow-x-auto pb-4 scroll-smooth hide-scrollbar py-1"
+            className="flex space-x-6 overflow-x-auto pb-4 scroll-smooth hide-scrollbar py-1 pb-10"
             style={{ cursor: isDragging ? 'grabbing' : 'grab' }} // Change cursor based on dragging state
           >
             {/* Use displayCertifications for duplication */}
@@ -590,7 +590,7 @@ const App = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="container mx-auto px-4 py-16 md:py-12 pb-8 md:pb-12 scroll-mt-[96px]">
+      <section id="about" className="container mx-auto px-4 py-16 md:py-2 pb-8 md:pb-12 scroll-mt-[96px]">
         <div className="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-lg">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8">
             About Me
