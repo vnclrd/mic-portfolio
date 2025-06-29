@@ -35,6 +35,25 @@ const App = () => {
     ],
   };
 
+  const education = [
+    {
+      id: 'edu-1',
+      degree: 'BS Computer Engineering',
+      institution: 'Polytechnic University of the Philippines',
+      years: '2021 - 2025',
+      description: 'Specialized in Software Development with a focus on web technologies.',
+      logoUrl: 'https://placehold.co/100x100/ADD8E6/000000?text=PUP+Logo'
+    },
+    {
+      id: 'edu-2',
+      degree: 'BS Interior Design',
+      institution: 'Polytechnic University of the Philippines',
+      years: '2019 - 2021',
+      description: 'My first course in Polytechnic University of the Philippines. Took 2 years of this course before shifting to BS Computer Engineering in 2021.',
+      logoUrl: 'https://placehold.co/100x100/FFD700/000000?text=PUP+Logo'
+    },
+  ];
+
   const projects = [
     {
       id: 'project-1',
@@ -78,6 +97,7 @@ const App = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6">
             <button onClick={() => scrollToSection('about')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">About</button>
+            <button onClick={() => scrollToSection('education')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Education</button>
             <button onClick={() => scrollToSection('skills')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Skills</button>
             <button onClick={() => scrollToSection('projects')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">Projects</button>
             <button onClick={() => scrollToSection('github')} className="text-gray-600 hover:text-indigo-700 font-medium transition duration-300 rounded-md px-3 py-2 hover:bg-gray-100">GitHub</button>
@@ -101,6 +121,7 @@ const App = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-white shadow-lg py-2">
             <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">About</button>
+            <button onClick={() => scrollToSection('education')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">Education</button>
             <button onClick={() => scrollToSection('skills')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">Skills</button>
             <button onClick={() => scrollToSection('projects')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">Projects</button>
             <button onClick={() => scrollToSection('github')} className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-100">GitHub</button>
@@ -110,7 +131,7 @@ const App = () => {
 
       {/* Intro Section */}
       <section className="relative bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-24 md:py-25 pt-28">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-4 text-center pt-10">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up">
             Hello, I'm Miguel Ivan Calarde
           </h1>
@@ -127,7 +148,7 @@ const App = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="container mx-auto px-4 py-16 md:py-24">
+      <section id="about" className="container mx-auto px-4 py-16 md:py-24 pb-8 md:pb-12"> {/* Modified padding-bottom here */}
         <div className="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-lg">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8">
             About Me
@@ -141,6 +162,28 @@ const App = () => {
           <p className="text-gray-700 leading-relaxed">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </p>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="bg-gray-50 pt-8 md:pt-6 py-16 md:py-24"> {/* Modified padding-top here */}
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
+            Education
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {education.map((edu) => (
+              <div key={edu.id} className="bg-white p-6 rounded-xl shadow-lg border-b-4 border-indigo-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex items-start space-x-4">
+                <img src={edu.logoUrl} alt={`${edu.institution} Logo`} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                <div>
+                  <h3 className="text-xl font-semibold text-indigo-600 mb-1">{edu.degree}</h3>
+                  <p className="text-gray-700 text-lg mb-1">{edu.institution}</p>
+                  <p className="text-gray-500 text-sm mb-3">{edu.years}</p>
+                  <p className="text-gray-700 leading-relaxed">{edu.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -217,9 +260,12 @@ const App = () => {
       {/* GitHub Section */}
       <section id="github" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Check out my GitHub!
           </h2>
+          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+              Feel free to check my projects on my GitHub account.
+          </p>
           <div className="flex flex-col items-center space-y-4">
             <a
               href="https://github.com/vnclrd"
@@ -228,9 +274,6 @@ const App = () => {
               className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-100 transform hover:scale-105 transition duration-300 ease-in-out">
               Visit GitHub
             </a>
-            <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-              Feel free to check my projects on my GitHub account.
-            </p>
           </div>
         </div>
       </section>
