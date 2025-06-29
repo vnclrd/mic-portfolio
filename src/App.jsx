@@ -31,15 +31,17 @@ const App = () => {
     if (!container) return;
 
     const scrollSpeed = 1; // Pixels per interval
-    const intervalTime = 60; // Milliseconds (controls smoothness and speed)
+    const intervalTime = 20; // Milliseconds
 
     if (scrollIntervalRef.current) {
       clearInterval(scrollIntervalRef.current);
     }
 
     scrollIntervalRef.current = setInterval(() => {
-      if (container.scrollLeft >= container.scrollWidth / 2) {
-        container.scrollLeft -= container.scrollWidth / 2;
+      const maxScrollLeft = Infinity;
+      if (container.scrollLeft >= maxScrollLeft) {
+        clearInterval(scrollIntervalRef.current);
+        scrollIntervalRef.current = null;
       } else {
         container.scrollLeft += scrollSpeed;
       }
@@ -455,7 +457,7 @@ const App = () => {
         {/* Added ref and hide-scrollbar class */}
         <div
           ref={certificationsContainerRef}
-          className="flex space-x-6 overflow-x-auto pb-4 scroll-smooth hide-scrollbar"
+          className="flex space-x-6 overflow-x-auto pb-4 scroll-smooth hide-scrollbar py-1"
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }} // Change cursor based on dragging state
         >
           {/* Use displayCertifications for duplication */}
