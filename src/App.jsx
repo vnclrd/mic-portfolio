@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showScrollToTop, setShowScrollToTop] = useState(false); // State for scroll-to-top button visibility
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const certificationsContainerRef = useRef(null);
 
-  // Effect to handle scroll event for the scroll-to-top button
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) { // Show button after scrolling down 300px
+      if (window.scrollY > 300) {
         setShowScrollToTop(true);
       } else {
         setShowScrollToTop(false);
@@ -19,6 +19,41 @@ const App = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const container = certificationsContainerRef.current;
+    if (!container) return;
+
+    let scrollInterval;
+    const scrollSpeed = 1;
+    const intervalTime = 20;
+
+    const startScrolling = () => {
+      scrollInterval = setInterval(() => {
+        if (container.scrollLeft >= container.scrollWidth / 2) {
+          container.scrollLeft -= container.scrollWidth / 2;
+        } else {
+          container.scrollLeft += scrollSpeed;
+        }
+      }, intervalTime);
+    };
+
+    const stopScrolling = () => {
+      clearInterval(scrollInterval);
+    };
+
+    startScrolling();
+
+    container.addEventListener('mouseenter', stopScrolling);
+    container.addEventListener('mouseleave', startScrolling);
+
+    return () => {
+      stopScrolling();
+      container.removeEventListener('mouseenter', stopScrolling);
+      container.removeEventListener('mouseleave', startScrolling);
+    };
+  }, []);
+
 
   const skills = {
     'Web Development': ['HTML5', 'CSS3', 'JavaScript (ES6+)'],
@@ -97,7 +132,7 @@ const App = () => {
       id: 'cert-1',
       name: 'Certification 1',
       issuer: 'Google (via Coursera)',
-      date: 'May 2023',
+      date: 'Month 2023',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       logoUrl: 'https://placehold.co/100x100/4285F4/FFFFFF?text=Google',
       credentialUrl: '#',
@@ -107,13 +142,85 @@ const App = () => {
       id: 'cert-2',
       name: 'Certification 2',
       issuer: 'Google (via Coursera)',
-      date: 'May 2023',
+      date: 'Month 2023',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       logoUrl: 'https://placehold.co/100x100/FFD700/000000?text=UMich',
       credentialUrl: '#',
-      imageUrl: 'https://placehold.co/150x100/4285F4/FFFFFF?text=Certification+2'
+      imageUrl: 'https://placehold.co/150x100/FFD700/000000?text=Certification+2'
+    },
+    {
+      id: 'cert-3',
+      name: 'Certification 3',
+      issuer: 'Google (via Coursera)',
+      date: 'Month 2023',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      logoUrl: 'https://placehold.co/100x100/3B5998/FFFFFF?text=Meta',
+      credentialUrl: '#',
+      imageUrl: 'https://placehold.co/150x100/3B5998/FFFFFF?text=Certification+3'
+    },
+    {
+      id: 'cert-4',
+      name: 'Certification 4',
+      issuer: 'Google (via Coursera)',
+      date: 'Month 2023',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      logoUrl: 'https://placehold.co/100x100/006699/FFFFFF?text=IBM',
+      credentialUrl: '#',
+      imageUrl: 'https://placehold.co/150x100/006699/FFFFFF?text=Certification+4'
+    },
+    {
+      id: 'cert-5',
+      name: 'Certification 5',
+      issuer: 'Google (via Coursera)',
+      date: 'Month 2023',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      logoUrl: 'https://placehold.co/100x100/FF9900/000000?text=AWS',
+      credentialUrl: '#',
+      imageUrl: 'https://placehold.co/150x100/FF9900/000000?text=Certification+5'
+    },
+    {
+      id: 'cert-6',
+      name: 'Certification 6',
+      issuer: 'Amazon Web Services (AWS)',
+      date: 'June 2025',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      logoUrl: 'https://placehold.co/100x100/0078D4/FFFFFF?text=Azure',
+      credentialUrl: '#',
+      imageUrl: 'https://placehold.co/150x100/0078D4/FFFFFF?text=Certification+6'
+    },
+    {
+      id: 'cert-7',
+      name: 'Certification 7',
+      issuer: 'Amazon Web Services (AWS)',
+      date: 'June 2025',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      logoUrl: 'https://placehold.co/100x100/F26522/FFFFFF?text=CompTIA',
+      credentialUrl: '#',
+      imageUrl: 'https://placehold.co/150x100/F26522/FFFFFF?text=Certification+7'
+    },
+    {
+      id: 'cert-8',
+      name: 'Certification 8',
+      issuer: 'Amazon Web Services (AWS)',
+      date: 'June 2025',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      logoUrl: 'https://placehold.co/100x100/0096D6/FFFFFF?text=Scrum',
+      credentialUrl: '#',
+      imageUrl: 'https://placehold.co/150x100/0096D6/FFFFFF?text=Certification+8'
+    },
+    {
+      id: 'cert-9',
+      name: 'Certification 9',
+      issuer: 'Amazon Web Services (AWS)',
+      date: 'June 2025',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      logoUrl: 'https://placehold.co/100x100/CC0000/FFFFFF?text=PMI',
+      credentialUrl: '#',
+      imageUrl: 'https://placehold.co/150x100/CC0000/FFFFFF?text=Certification+9'
     },
   ];
+
+  const displayCertifications = [...certifications, ...certifications];
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -123,7 +230,6 @@ const App = () => {
     }
   };
 
-  // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -293,26 +399,33 @@ const App = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
           Certifications
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {certifications.map((cert) => (
-            <div key={cert.id} className="bg-white rounded-xl shadow-lg overflow-hidden border-b-4 border-green-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex flex-col text-center"> {/* Removed items-center from parent div */}
+        {/* Added ref and hide-scrollbar class */}
+        <div
+          ref={certificationsContainerRef}
+          className="flex space-x-6 overflow-x-auto pb-4 scroll-smooth hide-scrollbar"
+        >
+          {/* Use displayCertifications for duplication */}
+          {displayCertifications.map((cert, index) => (
+            <div key={`${cert.id}-${index}`} className="bg-white rounded-xl shadow-lg overflow-hidden border-b-4 border-green-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex flex-col text-center min-w-[300px]">
               <img
                 src={cert.imageUrl}
                 alt={cert.name}
                 className="w-full h-32 object-cover rounded-t-xl"
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/150x100/CCCCCC/000000?text=Cert+Image`; }}
               />
-              <div className="p-6"> {/* Added padding to this div */}
-                <h3 className="text-xl font-semibold text-green-700 mb-1">{cert.name}</h3>
-                <p className="text-gray-700 text-lg mb-1">{cert.issuer}</p>
-                <p className="text-gray-500 text-sm mb-3">{cert.date}</p>
-                <p className="text-gray-700 leading-relaxed mb-3">{cert.description}</p>
+              <div className="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-semibold text-green-700 mb-1">{cert.name}</h3>
+                  <p className="text-gray-700 text-lg mb-1">{cert.issuer}</p>
+                  <p className="text-gray-500 text-sm mb-3">{cert.date}</p>
+                  <p className="text-gray-700 leading-relaxed mb-3">{cert.description}</p>
+                </div>
                 {cert.credentialUrl && (
                   <a
                     href={cert.credentialUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition duration-300"
+                    className="inline-flex items-center justify-center text-blue-600 hover:text-blue-800 font-semibold transition duration-300 mt-auto"
                   >
                     View Credential
                     <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
