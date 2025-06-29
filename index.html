@@ -1,51 +1,12 @@
-<!DOCTYPE html> <!-- SHIFT + ! -->
+<!DOCTYPE html>
 <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Portfolio Name</title>
-        <link rel="stylesheet" href="style.css"> <!-- link stylesheets -->
-        <link rel="stylesheet" href="mediaqueries.css">
-    </head>
-
-    <body>
-
-        <nav id="desktop-nav"> <!-- create nav -->
-            <div class="logo">Ivan Calarde</div> <!-- website logo -->
-            <div> <!-- create another div -->
-                <ul class="nav-links"> <!-- nav links -->
-                    <li><a href="#about">About</a></li> <!-- nav sections --> <!-- SHIFT + ALT + ARROW DOWN -->
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <nav id="hamburger-nav"> <!-- create hamburger icon nav for mobile nav -->
-
-            <div class="logo">Ivan Calarde</div>
-            <div class="hamburger-menu">
-
-                <div class="hamburger-icon" onclick="toggleMenu()"> <!-- targeted on script.js -->
-                   <span></span>
-                   <span></span>
-                   <span></span>
-                </div>
-
-                <div class="menu-links"> <!-- targeted on script.js -->
-                    <li><a href="#about" onclick="toggleMenu()">About</a></li> <!-- put toggleMenu() to close the tab when clicked again -->
-                    <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-                    <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-                    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-                </div>
-
-            </div>
-
-        </nav>
-
-        <script src="script.js"></script> <!-- link script.js -->
-    </body>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+</body>
 </html>
