@@ -421,12 +421,12 @@ const App = () => {
       </header>
 
       {/* Intro Section */}
-      <section className="relative bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-24 md:py-25 pt-28">
+      <section className="relative bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-24 md:py-25 pt-24 pb-14">
         <div className="container mx-auto px-4 text-center pt-10">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up">
-            Hello, I'm Miguel Ivan Calarde
+            Hello, I'm Miguel <span className="text-green-300">Ivan</span> Calarde
           </h1>
-          <p className="text-lg md:text-xl mb-8 opacity-90 animate-fade-in-up delay-200">
+          <p className="text-lg md:text-xl mb-8 opacity-90 animate-fade-in-up delay-200 pb-4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <button
