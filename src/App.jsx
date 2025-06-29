@@ -148,7 +148,8 @@ const App = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="container mx-auto px-4 py-16 md:py-24 pb-8 md:pb-12"> {/* Modified padding-bottom here */}
+      {/* MODIFIED: Added scroll-mt-[96px] */}
+      <section id="about" className="container mx-auto px-4 py-16 md:py-12 pb-8 md:pb-12 scroll-mt-[96px]">
         <div className="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-lg">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8">
             About Me
@@ -166,7 +167,8 @@ const App = () => {
       </section>
 
       {/* Education Section */}
-      <section id="education" className="bg-gray-50 pt-8 md:pt-6 py-16 md:py-24"> {/* Modified padding-top here */}
+      {/* MODIFIED: Added scroll-mt-[96px] */}
+      <section id="education" className="bg-gray-50 pt-8 md:pt-6 py-16 md:py-24 scroll-mt-[96px]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
             Education
@@ -174,7 +176,7 @@ const App = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {education.map((edu) => (
               <div key={edu.id} className="bg-white p-6 rounded-xl shadow-lg border-b-4 border-indigo-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex items-start space-x-4">
-                <img src={edu.logoUrl} alt={`${edu.institution} Logo`} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
+                {/* Removed the <img> tag for the logo */}
                 <div>
                   <h3 className="text-xl font-semibold text-indigo-600 mb-1">{edu.degree}</h3>
                   <p className="text-gray-700 text-lg mb-1">{edu.institution}</p>
@@ -188,7 +190,8 @@ const App = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="bg-gray-100 py-16 md:py-24">
+      {/* MODIFIED: Added scroll-mt-[96px] */}
+      <section id="skills" className="bg-gray-100 py-16 md:py-12 scroll-mt-[96px]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
             Skills
@@ -214,7 +217,8 @@ const App = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="container mx-auto px-4 py-16 md:py-24">
+      {/* MODIFIED: Added scroll-mt-[96px] */}
+      <section id="projects" className="container mx-auto px-4 py-16 md:py-12 scroll-mt-[96px]">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">
           Projects
         </h2>
@@ -258,7 +262,8 @@ const App = () => {
       </section>
 
       {/* GitHub Section */}
-      <section id="github" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 md:py-24">
+      {/* MODIFIED: Added scroll-mt-[96px] */}
+      <section id="github" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 md:py-12 scroll-mt-[96px]">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Check out my GitHub!
